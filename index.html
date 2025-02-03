@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Notes Hub</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.1rem;
+        }
+
+        /* Navigation */
+        nav {
+            background: #333;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            font-size: 1rem;
+        }
+
+        nav a:hover {
+            color: #007bff;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .note-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .note-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .note-card h3 {
+            margin: 0 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .note-card p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .note-card a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .note-card a:hover {
+            background: #0056b3;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 30px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .notes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Student Notes Hub</h1>
+        <p>Your one-stop destination for study materials</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#notes">Notes</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container" id="home">
+        <h2>Welcome to Student Notes Hub</h2>
+        <p>Download high-quality notes for your studies. Browse through our collection and enhance your learning experience.</p>
+    </div>
+
+    <div class="container" id="notes">
+        <h2>Available Notes</h2>
+        <div class="notes-grid">
+            <!-- Note Cards -->
+            <div class="note-card">
+                <h3>Mathematics Notes</h3>
+                <p>Comprehensive notes covering algebra, calculus, and geometry.</p>
+                <a href="math_notes.pdf" download>Download</a>
+            </div>
+            <div class="note-card">
+                <h3>Physics Notes</h3>
+                <p>Detailed notes on mechanics, thermodynamics, and electromagnetism.</p>
+                <a href="physics_notes.pdf" download>Download</a>
+            </div>
+            <div class="note-card">
+                <h3>Chemistry Notes</h3>
+                <p>Notes on organic, inorganic, and physical chemistry.</p>
+                <a href="chemistry_notes.pdf" download>Download</a>
+            </div>
+            <div class="note-card">
+                <h3>Biology Notes</h3>
+                <p>Complete notes on cell biology, genetics, and ecology.</p>
+                <a href="biology_notes.pdf" download>Download</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="container" id="about">
+        <h2>About Us</h2>
+        <p>We are a team of educators and developers dedicated to providing students with easy access to high-quality study materials. Our mission is to make learning more accessible and efficient.</p>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="container" id="contact">
+        <h2>Contact Us</h2>
+        <p>If you have any questions or suggestions, feel free to reach out to us at <a href="mailto:support@studenthub.com">support@studenthub.com</a>.</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Student Notes Hub. All rights reserved.</p>
+    </footer>
+</body>
+</html>
