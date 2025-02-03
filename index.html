@@ -4,14 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Notes Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome CDN -->
+    <link href="https://fonts.googleapis.com/css2?family=Algerian&display=swap" rel="stylesheet"> <!-- Algerian Font -->
     <style>
         /* General Styles */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
+            background-image: url("C:\\Users\\Hp\\Downloads\\alain-gehri-BqkbDOVoiyk-unsplash.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #f9f9f9;
         }
 
         a {
@@ -25,21 +36,75 @@
 
         /* Header */
         header {
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            color: white;
+            background: transparent; /* Fully transparent background */
             padding: 20px 0;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden; /* Ensure animated text doesn't overflow */
         }
 
         header h1 {
             margin: 0;
             font-size: 2.5rem;
+            color: black; /* Ensure text is black for visibility */
+        }
+
+        header h2 {
+            margin: 5px 0 0;
+            font-size: 1.5rem;
+            color: black; /* Ensure text is black for visibility */
         }
 
         header p {
             margin: 5px 0 0;
             font-size: 1.1rem;
+            color: black; /* Ensure text is black for visibility */
+        }
+
+        .logo {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            width: 150px; /* Increased size of the logo */
+            height: auto;
+        }
+
+        /* Animated Words */
+        .animated-words {
+            position: absolute;
+            top: 60px; /* Adjusted down */
+            right: -100%; /* Start off-screen */
+            font-family: 'Algerian', sans-serif;
+            font-size: 1.5rem; /* Smaller size */
+            color: black; /* Black color */
+            white-space: nowrap;
+            animation: slideRotateDisappear 10s infinite;
+        }
+
+        @keyframes slideRotateDisappear {
+            0% {
+                right: -100%; /* Start off-screen */
+            }
+            20% {
+                right: 20px; /* Slide into view */
+            }
+            40% {
+                right: 20px; /* Stay static */
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(360deg); /* Rotate 360 degrees */
+            }
+            60% {
+                opacity: 1; /* Stay visible */
+            }
+            80% {
+                opacity: 0; /* Disappear */
+            }
+            100% {
+                right: -100%; /* Slide out */
+                opacity: 0;
+            }
         }
 
         /* Navigation */
@@ -64,9 +129,15 @@
             max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
-            background: white;
+            background: rgba(255, 255, 255, 0.85); /* Increased transparency */
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode .container {
+            background: rgba(44, 44, 44, 0.85); /* Increased transparency */
+            color: #f9f9f9;
         }
 
         .notes-grid {
@@ -77,10 +148,15 @@
 
         .note-card {
             background: #fff;
-            border: 1px solid #ddd;
+            border: 1px solid rgba(221, 221, 221, 0.5); /* Increased transparency */
             border-radius: 8px;
             padding: 15px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body.dark-mode .note-card {
+            background: #333;
+            border-color: rgba(68, 68, 68, 0.5); /* Increased transparency */
         }
 
         .note-card:hover {
@@ -99,23 +175,65 @@
             color: #666;
         }
 
-        .note-card a {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 8px 15px;
-            background: #007bff;
-            color: white;
-            border-radius: 5px;
-            font-size: 0.9rem;
+        body.dark-mode .note-card p {
+            color: #aaa;
         }
 
-        .note-card a:hover {
+        .note-card .go-to-notes,
+        .note-card .upload-notes {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 12px 25px;
+            background: #007bff;
+            color: white;
+            border-radius: 25px; /* Rounded edges */
+            font-size: 1rem;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .note-card .go-to-notes:hover,
+        .note-card .upload-notes:hover {
+            background: #0056b3;
+        }
+
+        /* Search Bar */
+        #search {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(221, 221, 221, 0.5); /* Increased transparency */
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        body.dark-mode #search {
+            background: rgba(68, 68, 68, 0.5); /* Increased transparency */
+            border-color: rgba(85, 85, 85, 0.5); /* Increased transparency */
+            color: #f9f9f9;
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode-toggle:hover {
             background: #0056b3;
         }
 
         /* Footer */
         footer {
-            background: #333;
+            background: rgba(51, 51, 51, 0.9);
             color: white;
             text-align: center;
             padding: 15px 0;
@@ -127,14 +245,66 @@
             font-size: 0.9rem;
         }
 
+        /* Social Media Icons */
+        .social-icons {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .social-icons h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            color: inherit; /* Inherits the color from the parent (works in both light and dark modes) */
+        }
+
+        .social-icons a {
+            color: #007bff; /* Blue color for icons */
+            margin: 0 15px;
+            font-size: 2rem; /* Larger size for better visibility */
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #0056b3; /* Darker blue on hover */
+        }
+
+        /* Ensure icons are visible in dark mode */
+        body.dark-mode .social-icons a {
+            color: #f9f9f9; /* White color for icons in dark mode */
+        }
+
+        body.dark-mode .social-icons a:hover {
+            color: #007bff; /* Blue color on hover in dark mode */
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             header h1 {
                 font-size: 2rem;
             }
 
+            header h2 {
+                font-size: 1.2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .animated-words {
+                top: 80px; /* Adjusted for smaller screens */
+                font-size: 1.2rem; /* Smaller font size for mobile */
+            }
+
             .notes-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .animated-words {
+                top: 100px; /* Adjusted for very small screens */
+                font-size: 1rem; /* Even smaller font size */
             }
         }
     </style>
@@ -142,8 +312,12 @@
 <body>
     <!-- Header -->
     <header>
+        <img src="C:\\Users\\Hp\\Downloads\\logo-web.png" alt="Logo" class="logo"> <!-- Updated logo -->
         <h1>Student Notes Hub</h1>
-        <p>Your one-stop destination for study materials</p>
+        <h2>For Bsc.Mathematics and statistics (UDSM only)</h2>
+        <p>A TRIAL WEBSITE this be one-stop destination for study materials</p>
+        <!-- Animated Words -->
+        <div class="animated-words">A class of<br>2022-2025</div>
     </header>
 
     <!-- Navigation -->
@@ -156,33 +330,52 @@
 
     <!-- Main Content -->
     <div class="container" id="home">
-        <h2>Welcome to Student Notes Hub</h2>
-        <p>Download high-quality notes for your studies. Browse through our collection and enhance your learning experience.</p>
+        <h2>Welcome to Student Hub for mathematics and statistics</h2>
+        <p>This website is a trial version created for learning and educational purposes. It is not a fully developed secured platform. Please do not inspect or manipulate it for your personal reasons.</p>
     </div>
 
     <div class="container" id="notes">
         <h2>Available Notes</h2>
-        <div class="notes-grid">
-            <!-- Note Cards -->
+        <!-- Search Bar -->
+        <input type="text" id="search" placeholder="Search notes...">
+        <!-- Notes Grid -->
+        <div class="notes-grid" id="notes-grid">
             <div class="note-card">
-                <h3>Mathematics Notes</h3>
-                <p>Comprehensive notes covering algebra, calculus, and geometry.</p>
-                <a href="math_notes.pdf" download>Download</a>
+                <h3>FIRST YEAR</h3>
+                <p>Comprehensive notes for first-year subjects.</p>
+                <div class="go-to-notes">GO TO NOTES</div> <!-- Added GO TO NOTES button -->
             </div>
             <div class="note-card">
-                <h3>Physics Notes</h3>
-                <p>Detailed notes on mechanics, thermodynamics, and electromagnetism.</p>
-                <a href="physics_notes.pdf" download>Download</a>
+                <h3>SECOND YEAR</h3>
+                <p>Comprehensive notes for second-year subjects.</p>
+                <div class="go-to-notes">GO TO NOTES</div> <!-- Added GO TO NOTES button -->
             </div>
             <div class="note-card">
-                <h3>Chemistry Notes</h3>
-                <p>Notes on organic, inorganic, and physical chemistry.</p>
-                <a href="chemistry_notes.pdf" download>Download</a>
+                <h3>THIRD YEAR</h3>
+                <p>Comprehensive notes for third-year subjects.</p>
+                <div class="go-to-notes">GO TO NOTES</div> <!-- Added GO TO NOTES button -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Notes Section -->
+    <div class="container" id="upload-notes">
+        <h2>Upload Notes</h2>
+        <div class="notes-grid" id="upload-notes-grid">
+            <div class="note-card">
+                <h3>FIRST YEAR</h3>
+                <p>Upload your notes for first-year subjects.</p>
+                <div class="upload-notes">UPLOAD YOUR NOTES</div>
             </div>
             <div class="note-card">
-                <h3>Biology Notes</h3>
-                <p>Complete notes on cell biology, genetics, and ecology.</p>
-                <a href="biology_notes.pdf" download>Download</a>
+                <h3>SECOND YEAR</h3>
+                <p>Upload your notes for second-year subjects.</p>
+                <div class="upload-notes">UPLOAD YOUR NOTES</div>
+            </div>
+            <div class="note-card">
+                <h3>THIRD YEAR</h3>
+                <p>Upload your notes for third-year subjects.</p>
+                <div class="upload-notes">UPLOAD YOUR NOTES</div>
             </div>
         </div>
     </div>
@@ -190,18 +383,85 @@
     <!-- About Section -->
     <div class="container" id="about">
         <h2>About Us</h2>
-        <p>We are a team of educators and developers dedicated to providing students with easy access to high-quality study materials. Our mission is to make learning more accessible and efficient.</p>
+        <p>Make it easy sharing is caring.</p>
     </div>
 
     <!-- Contact Section -->
     <div class="container" id="contact">
         <h2>Contact Us</h2>
-        <p>If you have any questions or suggestions, feel free to reach out to us at <a href="mailto:support@studenthub.com">support@studenthub.com</a>.</p>
+        <p>If you have any questions or suggestions, feel free to reach out to us at <a href="mailto:selemanirichard99@gmail.com">selemanirichard99@gmail.com</a>.</p>
+        
+        <!-- New Section for Social Media Icons -->
+        <div class="social-icons">
+            <h3>STAY CONNECTED WITH YOUR COLLEAGUES</h3>
+            <a href="https://www.facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://x.com" target="_blank" title="X.com (Twitter)"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.tiktok.com" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2023 Student Notes Hub. All rights reserved.</p>
+        <p>&copy; <span id="year"></span> Student Notes Hub. All rights reserved.</p>
     </footer>
+
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle" id="dark-mode-toggle">🌙</button>
+
+    <!-- JavaScript -->
+    <script>
+        // Sample Notes Data
+        const notes = [
+            { title: "FIRST YEAR", description: "Comprehensive notes for first-year subjects." },
+            { title: "SECOND YEAR", description: "Comprehensive notes for second-year subjects." },
+            { title: "THIRD YEAR", description: "Comprehensive notes for third-year subjects." },
+        ];
+
+        // DOM Elements
+        const notesGrid = document.getElementById('notes-grid');
+        const uploadNotesGrid = document.getElementById('upload-notes-grid');
+        const searchInput = document.getElementById('search');
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+
+        // Load Notes
+        function loadNotes() {
+            notesGrid.innerHTML = notes.map(note => `
+                <div class="note-card">
+                    <h3>${note.title}</h3>
+                    <p>${note.description}</p>
+                    <div class="go-to-notes">GO TO NOTES</div>
+                </div>
+            `).join('');
+        }
+
+        // Event Listeners
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredNotes = notes.filter(note =>
+                note.title.toLowerCase().includes(searchTerm) ||
+                note.description.toLowerCase().includes(searchTerm)
+            );
+            notesGrid.innerHTML = filteredNotes.map(note => `
+                <div class="note-card">
+                    <h3>${note.title}</h3>
+                    <p>${note.description}</p>
+                    <div class="go-to-notes">GO TO NOTES</div>
+                </div>
+            `).join('');
+        });
+
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        });
+
+        // Initial Load
+        loadNotes();
+
+        // Dynamic Year in Footer
+        const year = new Date().getFullYear();
+        document.getElementById('year').textContent = year;
+    </script>
 </body>
 </html>
